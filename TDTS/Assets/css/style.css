@@ -154,6 +154,34 @@ body {
     position: relative;
 }
 
+.flashcard-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: var(--platinum);
+}
+
+.flashcard-section header {
+    padding: 1em;
+}
+.flashcard-section header p {
+   font-weight: 700;
+   color: var(--af-white);
+
+}
+.flashcard-section .fc-line {
+    width: 90%;
+    height: 2px;
+    background-color: #fff;
+    margin: 1em 0;
+}
+
+.flashcard-section div p {
+    padding: 1em;
+}
+
 .cd-card-buttons {
     position: absolute;
     bottom: 0;
@@ -167,7 +195,7 @@ body {
 .cd-card-buttons .btn-reverse, 
 .cd-card-buttons .btn-nxt {
     background-color: var(--cl-purple-btn);
-    width: 100px;
+    width: 15%;
     height: 32px;
     color: var(--white);
     border-radius: 999px;
