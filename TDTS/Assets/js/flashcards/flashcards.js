@@ -56,11 +56,11 @@ let flashcards = [
         definition: "",
         note: "Cyberprzemoc to zjawisko polegające na wykorzystywaniu technologii do nękania, zastraszania lub ośmieszania innych. Może to obejmować takie działania jak doxxing (udostępnianie prywatnych informacji o osobie w sieci), hejt, wysyłanie obraźliwych wiadomości, nękanie psychiczne przez internet, publikowanie fałszywych informacji o innych osobach w sieci czy groźby przemocy fizycznej."
     },
-    {
-        id: "",
-        concept: "",
-        img: "",
-        definition: "",
-        note: ""
-    },
+    // {
+    //     id: "",
+    //     concept: "",
+    //     img: "",
+    //     definition: "",
+    //     note: ""
+    // },
 ]
