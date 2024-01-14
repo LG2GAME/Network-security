@@ -1,18 +1,18 @@
 const renderFlashcardItem = (items) => {
     let i = 0;
-    let didReverse = false;
+    let isReverse = false;
     
     const newFlashCardItem = document.createElement("div");
 
     RenderFlashcardHeader(newFlashCardItem, items, i);
 
     document.getElementById("btn-reverse").onclick = () => {
-        if(didReverse === true) {
+        if(isReverse === true) {
             RenderFlashcardHeader(newFlashCardItem, items, i)
-            didReverse = false;
-        } else if(didReverse === false) {
+            isReverse = false;
+        } else if(isReverse === false) {
             RenderFlashcardSection(newFlashCardItem, items, i);
-            didReverse = true;
+            isReverse = true;
         }
     };
     document.getElementById("btn-prv").onclick = () => {
@@ -22,9 +22,9 @@ const renderFlashcardItem = (items) => {
             i--;
         }
 
-        if(didReverse === true) {
+        if(isReverse === true) {
             RenderFlashcardSection(newFlashCardItem, items, i);
-        } else if(didReverse === false) {
+        } else if(isReverse === false) {
             RenderFlashcardHeader(newFlashCardItem, items, i)
         }
     };
@@ -35,9 +35,9 @@ const renderFlashcardItem = (items) => {
             i++;
         }
         
-        if(didReverse === true) {
+        if(isReverse === true) {
             RenderFlashcardSection(newFlashCardItem, items, i);
-        } else if(didReverse === false) {
+        } else if(isReverse === false) {
             RenderFlashcardHeader(newFlashCardItem, items, i)
         }
     };
@@ -67,9 +67,15 @@ function RenderFlashcardSection(newFlashCardItem, items, i) {
         </header>
         <div class="fc-line"></div>
         <div class="fc-text">
-            <p class="fc-definition h5">${items[i].definition}</p>
-            <div class="fc-text-line"></div>
-            <p class="fc-note h5">${items[i].note}</p>
+            <div class="fc-definition">
+                <p class="h2">Co to jest?</p>
+                <p class="h5">${items[i].definition}</p>
+            </div>
+            <div class="fc-note">
+                <p class="h2">Jak się chronić?</p>
+                <p class="h5">${items[i].note}</p>
+            </div>
+        
         </div>
         `
     flashcardItem.appendChild(newFlashCardItem);
