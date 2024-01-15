@@ -326,3 +326,17 @@ body {
     font-weight: 600;
     transform: scale(1.05);
 } */
+
+.game-end {
+    color: var(--platinum);
+}
+
+.game-end-points {
+    color: var(--platinum);
+}
+.game-end-points span {
+    background-color: var(--cl-purple-btn);
+    border-radius: 999px;
+    padding: 0 25px;
+    color: var(--af-white);
+}

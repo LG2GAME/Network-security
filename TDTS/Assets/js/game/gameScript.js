@@ -5,13 +5,13 @@ function gameBuild(gameFrame, gameItem, i, points, isStarted) {
     } else {
         RenderMenuGame(gameFrame);
         document.querySelector(".play").addEventListener("click", () => {
-            if(document.querySelector("#inputName").value) isStarted = true;
-            else document.querySelector(".errorInput").innerHTML = "Podaj swoją nazwę!";
-
-            gameBuild(gameFrame, gameItem, i, points, isStarted);
+            if(!document.querySelector("#inputName").value) document.querySelector(".errorInput").innerHTML = "Podaj swoją nazwę!";
+            else {
+                isStarted = true;
+                gameBuild(gameFrame, gameItem, i, points, isStarted);
+            }
         });
     }
-
     isAnswerTrue(gameFrame, gameItem, i, points, isStarted);
 }
 
@@ -36,12 +36,12 @@ function isAnswerTrue(gameFrame, gameItem, i, points, isStarted) {
             points += gameItem[i].punkty;
             i++;
 
-            if(i >= gameItem.length - 1) RenderFinishMenuGame(gameFrame, points);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameFrame, points);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         } else {
             i++;
 
-            if(i > gameItem.length - 1) RenderFinishMenuGame(gameFrame, points);
+            if(i > gameItem.length) RenderFinishMenuGame(gameFrame, points);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         }
     });
@@ -50,12 +50,12 @@ function isAnswerTrue(gameFrame, gameItem, i, points, isStarted) {
             points += gameItem[i].punkty;
             i++;
 
-            if(i >= gameItem.length - 1) RenderFinishMenuGame(gameFrame, points);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameFrame, points);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         } else {
             i++;
 
-            if(i > gameItem.length - 1) RenderFinishMenuGame(gameFrame, points);
+            if(i > gameItem.length) RenderFinishMenuGame(gameFrame, points);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         }
     });
@@ -64,12 +64,12 @@ function isAnswerTrue(gameFrame, gameItem, i, points, isStarted) {
             points += gameItem[i].punkty;
             i++;
 
-            if(i >= gameItem.length - 1) RenderFinishMenuGame(gameFrame, points);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameFrame, points);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         } else {
             i++;
 
-            if(i > gameItem.length - 1) RenderFinishMenuGame(gameFrame, points);
+            if(i > gameItem.length) RenderFinishMenuGame(gameFrame, points);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         }
     });
@@ -78,12 +78,12 @@ function isAnswerTrue(gameFrame, gameItem, i, points, isStarted) {
             points += gameItem[i].punkty;
             i++;
 
-            if(i >= gameItem.length - 1) RenderFinishMenuGame(gameFrame, points);
+            if(i >= gameItem.lengt1) RenderFinishMenuGame(gameFrame, points);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         } else {
             i++;
 
-            if(i > gameItem.length - 1) RenderFinishMenuGame(gameFrame, points);
+            if(i > gameItem.length) RenderFinishMenuGame(gameFrame, points);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         }
     });
@@ -136,10 +136,8 @@ function RenderFinishMenuGame(gameFrame, points) {
 
     gameFrame.className = "game-play-panel";
     gameFrame.innerHTML = `
-    <div>
-        <p class="h5">Brawo! Skończyłeś/aś Quizz</p>
-        <p class="h5">${points}</p>
-    </div>
+        <p class="game-end h2">Gratuluję ukończenia Quizzu.</p>
+        <p class="game-end-points h4">Twój wynik to: <sclass="h3">${points}</span></p>
     `
     gameBody.appendChild(gameFrame);
 }
