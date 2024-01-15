@@ -322,7 +322,7 @@ body {
     transform: scale(1.05);
     font-weight: 600;
 }
-.game-board .answers button:focus {
+/* .game-board .answers button:focus {
     font-weight: 600;
     transform: scale(1.05);
-}
+} */

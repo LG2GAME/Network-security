@@ -1,27 +1,93 @@
-const renderGame = (gameItem) => {
-    let points = 0;
-    let isStarted = true; //// Zmienić na false
-    const gameFrame = document.createElement("div");
-
+function gameBuild(gameFrame, gameItem, i, points, isStarted) {
     if(isStarted === true) {
-        RenderGameBody(gameFrame, gameItem);
+        RenderGameBody(gameFrame, gameItem, i, points);
         setScrollnStop();
     } else {
-        RenderMenuGame(gameFrame, gameItem);
+        RenderMenuGame(gameFrame);
+        document.querySelector(".play").addEventListener("click", () => {
+            if(document.querySelector("#inputName").value) isStarted = true;
+            else document.querySelector(".errorInput").innerHTML = "Podaj swoją nazwę!";
+
+            gameBuild(gameFrame, gameItem, i, points, isStarted);
+        });
     }
 
-    document.querySelector(".play").addEventListener("click", () => {
-        if(document.getElementById("inputName").value) isStarted = true;
+    isAnswerTrue(gameFrame, gameItem, i, points, isStarted);
+}
 
-        document.querySelector(".errorInput").innerHTML = "Podaj swoją nazwę!";
+const renderGame = (gameItem) => {
+    let i = 0;
+    let points = 0;
+    let isStarted = false; //// Zmienić na false
+    const gameFrame = document.createElement("div");
 
-        if(isStarted === true) {
-            RenderGameBody(gameFrame, gameItem);
-            setScrollnStop();
-        }
-    })
+    gameBuild(gameFrame, gameItem, i, points, isStarted);
 }
 window.addEventListener("load", renderGame(quizBase));
+
+function isAnswerTrue(gameFrame, gameItem, i, points, isStarted) {
+    const answerAID = document.querySelector("#answerA");
+    const answerBID = document.querySelector("#answerB");
+    const answerCID = document.querySelector("#answerC");
+    const answerDID = document.querySelector("#answerD");
+
+    answerAID.addEventListener("click", () => {
+        if(gameItem[i].correctAnswer === gameItem[i].answerA) {
+            points += gameItem[i].punkty;
+            i++;
+
+            if(i >= gameItem.length - 1) RenderFinishMenuGame(gameFrame, points);
+            else gameBuild(gameFrame, gameItem, i, points, isStarted);
+        } else {
+            i++;
+
+            if(i > gameItem.length - 1) RenderFinishMenuGame(gameFrame, points);
+            else gameBuild(gameFrame, gameItem, i, points, isStarted);
+        }
+    });
+    answerBID.addEventListener("click", () => {
+        if(gameItem[i].correctAnswer === gameItem[i].answerB) {
+            points += gameItem[i].punkty;
+            i++;
+
+            if(i >= gameItem.length - 1) RenderFinishMenuGame(gameFrame, points);
+            else gameBuild(gameFrame, gameItem, i, points, isStarted);
+        } else {
+            i++;
+
+            if(i > gameItem.length - 1) RenderFinishMenuGame(gameFrame, points);
+            else gameBuild(gameFrame, gameItem, i, points, isStarted);
+        }
+    });
+    answerCID.addEventListener("click", () => {
+        if(gameItem[i].correctAnswer === gameItem[i].answerC) {
+            points += gameItem[i].punkty;
+            i++;
+
+            if(i >= gameItem.length - 1) RenderFinishMenuGame(gameFrame, points);
+            else gameBuild(gameFrame, gameItem, i, points, isStarted);
+        } else {
+            i++;
+
+            if(i > gameItem.length - 1) RenderFinishMenuGame(gameFrame, points);
+            else gameBuild(gameFrame, gameItem, i, points, isStarted);
+        }
+    });
+    answerDID.addEventListener("click", () => {
+        if(gameItem[i].correctAnswer === gameItem[i].answerD) {
+            points += gameItem[i].punkty;
+            i++;
+
+            if(i >= gameItem.length - 1) RenderFinishMenuGame(gameFrame, points);
+            else gameBuild(gameFrame, gameItem, i, points, isStarted);
+        } else {
+            i++;
+
+            if(i > gameItem.length - 1) RenderFinishMenuGame(gameFrame, points);
+            else gameBuild(gameFrame, gameItem, i, points, isStarted);
+        }
+    });
+}
 
 // Set scrolling to hidden
 function setScrollnStop() {
@@ -30,7 +96,7 @@ function setScrollnStop() {
 }
 
 // Render game menu
-function RenderMenuGame(gameFrame, gameItem) {
+function RenderMenuGame(gameFrame) {
     const gameBody = document.querySelector(".game-panel");
 
     gameFrame.className = "game-play-panel";
@@ -45,21 +111,34 @@ function RenderMenuGame(gameFrame, gameItem) {
 }
 
 // Render game
-function RenderGameBody(gameFrame, gameItem) {
+function RenderGameBody(gameFrame, gameItem, i, points) {
     const gameBody = document.querySelector(".game-panel");
 
     gameFrame.className = "game-board";
     gameFrame.innerHTML = `
     <div class="game-info">
         <p class="timer h5">Czas: 0</p>
-        <p class="points h5">Punkty: 0</p>
+        <p class="points h5">Punkty: ${points}</p>
     </div>
-        <p class="question h3">Jakieś pytanie cnie?</p>
+        <p class="question h3">${gameItem[i].question}</p>
     <div class="answers">
-        <button id="answerA" class="h6">A. Odpowiedź</button>
-        <button id="answerB" class="h6">B. Odpowiedź</button>
-        <button id="answerC" class="h6">C. Odpowiedź</button>
-        <button id="answerD" class="h6">D. Odpowiedź</button>
+        <button id="answerA" class="h6">A. ${gameItem[i].answerA}</button>
+        <button id="answerB" class="h6">B. ${gameItem[i].answerB}</button>
+        <button id="answerC" class="h6">C. ${gameItem[i].answerC}</button>
+        <button id="answerD" class="h6">D. ${gameItem[i].answerD}</button>
+    </div>
+    `
+    gameBody.appendChild(gameFrame);
+}
+
+function RenderFinishMenuGame(gameFrame, points) {
+    const gameBody = document.querySelector(".game-panel");
+
+    gameFrame.className = "game-play-panel";
+    gameFrame.innerHTML = `
+    <div>
+        <p class="h5">Brawo! Skończyłeś/aś Quizz</p>
+        <p class="h5">${points}</p>
     </div>
     `
     gameBody.appendChild(gameFrame);
