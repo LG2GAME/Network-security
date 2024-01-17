@@ -41,7 +41,7 @@ function isAnswerTrue(gameFrame, gameItem, i, points, isStarted) {
         } else {
             i++;
 
-            if(i > gameItem.length) RenderFinishMenuGame(gameFrame, points);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameFrame, points);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         }
     });
@@ -55,7 +55,7 @@ function isAnswerTrue(gameFrame, gameItem, i, points, isStarted) {
         } else {
             i++;
 
-            if(i > gameItem.length) RenderFinishMenuGame(gameFrame, points);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameFrame, points);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         }
     });
@@ -69,7 +69,7 @@ function isAnswerTrue(gameFrame, gameItem, i, points, isStarted) {
         } else {
             i++;
 
-            if(i > gameItem.length) RenderFinishMenuGame(gameFrame, points);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameFrame, points);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         }
     });
@@ -78,12 +78,12 @@ function isAnswerTrue(gameFrame, gameItem, i, points, isStarted) {
             points += gameItem[i].punkty;
             i++;
 
-            if(i >= gameItem.lengt1) RenderFinishMenuGame(gameFrame, points);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameFrame, points);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         } else {
             i++;
 
-            if(i > gameItem.length) RenderFinishMenuGame(gameFrame, points);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameFrame, points);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         }
     });
