@@ -10,7 +10,7 @@
     --onyx: #444444;
     --platinum: #d9d9d9;
     --rich-black: #151921;
-    --silver: #e6e6e6;
+    --silver: #c6c6c6;
     --taupe: #514438;
     --white: #fff;
 }
@@ -70,10 +70,12 @@ body {
 }
 
 .left-section-st,
-.right-section-st {
+.right-section-st,
+.left-section-nd,
+.right-section-nd {
     width: 50%;
-    height: 70vh;
-    padding: 10em 2em;
+    height: 80vh;
+    padding: 8em 2em;
     border-radius: 16px;
     margin: 2rem;
 }
@@ -120,212 +122,191 @@ body {
     list-style-type: decimal;
 }
 
-.nd-info .fg-triangle {
-    left: 0;
-    top: 100%;
-    transform: rotate(180deg);
+.nd-section {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
 }
 
-.nd-info-section {
+.left-section-nd,
+.right-section-nd {
+    /* From https://css.glass */
+    background: rgba(21, 25, 33, 0.23);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(21, 25, 33, 0.3);
+}
+
+.left-section-nd {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-.nd-othr {
-    color: var(--white);
-}
-
-.nd-card {
-    background-color: var(--cl-purple);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    border-radius: 50px;
-    width: 80vw;
-    height: 85vh;
     position: relative;
-    margin: 2rem 0;
+    color: var(--af-white);
+}
+.nd-numb {
+    color: var(--cl-purple);
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 1rem;
+    font-style: italic;
+}
+.nd-card-info {
+    margin: 2.5rem 0 0 1rem;
+}
+.nd-card-name {
+    margin-bottom: 1rem;
 }
 
-.flashcard-section {
-    width: 100%;
-    height: 100%;
-    align-items: center;
+.nd-buttons {
+    position: absolute;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 2rem;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+.nd-buttons button {
+    border-radius: 999px; 
+    border: none;
+    color: var(--af-white);
+    background-color: var(--cl-purple);
+    padding: .15rem 5rem;
+    transition: all .3s ease;
+}
+.nd-buttons button:hover {
+    transform: scale(1.05);
+}
+.nd-buttons button:nth-child(1):hover i {
+    animation: ArrowLeft .4s alternate 6 ease-in-out;
+}
+.nd-buttons button:nth-child(2):hover i {
+    animation: ArrowRight .4s alternate 6 ease-in-out;
+}
+
+.right-section-nd {
+    color: var(--af-white);
+    display: flex;
     flex-direction: column;
-    color: var(--platinum);
-    margin: 2rem 0;
+    justify-content: space-between;
 }
 
-.fc-ctn {
+.rd-section {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
-.fc-line {
-    width: 90%;
-    height: 5px;
-    background-color: var(--platinum);
-    border-radius: 999px;
-    margin: 2em 0;
+.rd-section h2 {
+    color: var(--af-white);
+}
+
+.rd-card {
+    width: 85vw;
+    height: 90vh;
+    background-color: var(--cl-purple);
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    border-radius: 16px;
+    position: relative;
+}
+
+.cd-card-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 1.5rem;
+}
+.cd-card-buttons button {
+    /* From https://css.glass */
+    backdrop-filter: blur(5px);
+    background: rgba(21, 25, 33, 0.23);
+    border-radius: 16px;
+    border: none;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    color: var(--af-white);
+    padding: .15rem 5rem;
+    transition: all .3s ease;
+}
+.cd-card-buttons button:hover {
+    transform: scale(1.05);
+}
+.cd-card-buttons button:nth-child(1):hover i {
+    animation: ArrowLeft .4s alternate 6 ease-in-out;
+}
+.cd-card-buttons button:nth-child(2):hover i {
+    animation: RotateButton 1s forwards ease-in-out;
+}
+.cd-card-buttons button:nth-child(3):hover i {
+    animation: ArrowRight .4s alternate 6 ease-in-out;
+}
+
+/* Animations of transform */
+@keyframes ArrowLeft {
+    from {
+        transform: translateX(0px);
+    } to {
+        transform: translateX(-10px);
+    }
+}
+@keyframes RotateButton {
+    from {
+        transform: rotate(0deg);
+    } to {
+        transform: rotate(180deg);
+    }
+}
+@keyframes ArrowRight {
+    from {
+        transform: translateX(0px);
+    } to {
+        transform: translateX(10px);
+    }
+}
+
+.fc-concept {
+    color: var(--af-white);
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
 }
 
 .fc-text {
-    width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    width: 100%;
 }
 
 .fc-definition,
 .fc-note {
     width: 50%;
-    height: 80%;
-    padding: 0 2rem;
-}
-.fc-definition {
-    border-right: 2.5px solid var(--platinum);
-    text-align: right;
-}
-.fc-note {
-    border-left: 2.5px solid var(--platinum);
-    text-align: left;
+    margin: 1rem;
+    /* From https://css.glass */
+    background: rgba(21, 25, 33, 0.23);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    padding: 1rem;
 }
 
-.cd-card-buttons {
-    position: absolute;
-    bottom: 0;
-    display: flex;
-    width: 100%;
-    padding: 2rem;
-    flex-direction: row;
-    justify-content: space-between;
-}
-.cd-card-buttons .btn-prv, 
-.cd-card-buttons .btn-reverse, 
-.cd-card-buttons .btn-nxt {
-    background-color: var(--cl-purple-btn);
-    width: 15%;
-    height: 32px;
-    color: var(--white);
-    border-radius: 999px;
-    border: none;
-    transition: transform .3s ease;
-}
-.cd-card-buttons .btn-prv:hover, 
-.cd-card-buttons .btn-reverse:hover, 
-.cd-card-buttons .btn-nxt:hover {
-    transform: scale(1.05);
-}
-
-.game {
-    flex-direction: column;
-}
-
-/* Style for menu */
-.game-play-panel {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    align-items: center;
-    justify-content: space-evenly;
-}
-.game-play-panel input,
-.game-play-panel .play {
-    background-color: var(--cl-purple-btn);
-    border: none;
-    padding: 10px;
-    border-radius: 999px;
-    transition: all .3s;
-    color: var(--af-white);
-}
-.game-play-panel input::placeholder {
-    color: var(--af-white);
-    font-style: italic;
-}
-.game-play-panel input:hover,
-.game-play-panel .play:hover {
-    border: none;
-    transform: scale(1.05);
-}
-.game-play-panel input:focus {
-    transform: scale(1.05);
-}
-
-/* Style for game */
-.game-board {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    align-items: center;
-    position: relative;
-}
-
-.game-info {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 100%;
-    margin: 10px;
-}
-.game-info p {
-    background-color: var(--cl-purple-btn);
-    padding: 10px;
-    border-radius: 999px;
-}
-
-.game-board .question {
-    position: absolute;
-    top: 30%;
-    background-color: var(--cl-purple-btn);
-    padding: 5px 30px;
-    border-radius: 999px;
-    color: var(--af-white);
-}
-
-.game-board .answers {
-    position: absolute;
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    bottom: 20px;
-}
-.game-board .answers button {
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 999px;
-    border: none;
-    transition: all .3s;
-    text-align: left;
-    background-color: var(--cl-purple-btn);
-}
-.game-board .answers button:hover {
-    transform: scale(1.05);
-    font-weight: 600;
-}
-/* .game-board .answers button:focus {
-    font-weight: 600;
-    transform: scale(1.05);
-} */
-
-.game-end {
+.fc-title {
     color: var(--platinum);
 }
 
-.game-end-points {
-    color: var(--platinum);
-}
-.game-end-points span {
-    background-color: var(--cl-purple-btn);
-    border-radius: 999px;
-    padding: 0 25px;
-    color: var(--af-white);
+.fc-t {
+    color: var(--silver);
 }

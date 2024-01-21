@@ -62,21 +62,22 @@ function RenderFlashcardSection(newFlashCardItem, items, i) {
 
     newFlashCardItem.className = "flashcard-section"; 
     newFlashCardItem.innerHTML = `
-        <header>
+        <header class="fc-header-rotate">
             <p class="fc-concept h1">${items[i].concept}</p>
         </header>
-        <div class="fc-line"></div>
         <div class="fc-text">
             <div class="fc-definition">
-                <p class="h2">Co to jest?</p>
-                <p class="h5">${items[i].definition}</p>
+                <p class="fc-title h2">${items[i].defName}</p>
+                <p class="fc-t h5">${items[i].def}</p>
             </div>
             <div class="fc-note">
-                <p class="h2">Jak się chronić?</p>
-                <p class="h5">${items[i].note}</p>
+                <p class="fc-title h2">${items[i].protName}</p>
+                <p class="fc-t h5">${items[i].prot}</p>
             </div>
         
         </div>
         `
     flashcardItem.appendChild(newFlashCardItem);
+
+    document.querySelector(".fc-concept").style = "align-items: center; display: flex; justify-content: center; position: static; transform: translate(0, 0);"
 }
