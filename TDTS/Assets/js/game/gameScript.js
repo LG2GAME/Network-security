@@ -1,23 +1,16 @@
 function gameBuild(gameFrame, gameItem, i, points, isStarted) {
-    let nameOfPlayer
-
     if(isStarted === true) { // zmienic na true
-        nameOfPlayer = "noname" || document.querySelector("#inputName").value;
-
-        RenderGameBody(gameFrame, gameItem, i, points, nameOfPlayer);
+        RenderGameBody(gameFrame, gameItem, i, points);
         setScrollnStop();
     } else {
         RenderMenuGame(gameFrame);
         document.querySelector(".play").addEventListener("click", () => {
-            if(!document.querySelector("#inputName").value) document.querySelector(".errorInput").innerHTML = "Podaj swoją nazwę!";
-            else {
                 isStarted = true;
                 gameBuild(gameFrame, gameItem, i, points, isStarted);
-            }
         });
     }
 
-    isAnswerTrue(gameFrame, gameItem, i, points, isStarted, nameOfPlayer);
+    isAnswerTrue(gameFrame, gameItem, i, points, isStarted);
 }
 
 const renderGame = (gameItem) => {
@@ -30,7 +23,7 @@ const renderGame = (gameItem) => {
 }
 window.addEventListener("load", renderGame(quizBase));
 
-function isAnswerTrue(gameFrame, gameItem, i, points, isStarted, name) {
+function isAnswerTrue(gameFrame, gameItem, i, points, isStarted) {
     const answerAID = document.querySelector("#answerA");
     const answerBID = document.querySelector("#answerB");
     const answerCID = document.querySelector("#answerC");
@@ -41,12 +34,12 @@ function isAnswerTrue(gameFrame, gameItem, i, points, isStarted, name) {
             points += gameItem[i].punkty;
             i++;
 
-            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points, name);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         } else {
             i++;
 
-            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points, name);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         }
     });
@@ -55,12 +48,12 @@ function isAnswerTrue(gameFrame, gameItem, i, points, isStarted, name) {
             points += gameItem[i].punkty;
             i++;
 
-            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points, name);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         } else {
             i++;
 
-            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points, name);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         }
     });
@@ -69,12 +62,12 @@ function isAnswerTrue(gameFrame, gameItem, i, points, isStarted, name) {
             points += gameItem[i].punkty;
             i++;
 
-            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points, name);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         } else {
             i++;
 
-            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points, name);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         }
     });
@@ -83,12 +76,12 @@ function isAnswerTrue(gameFrame, gameItem, i, points, isStarted, name) {
             points += gameItem[i].punkty;
             i++;
 
-            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points, name);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         } else {
             i++;
 
-            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points, name);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         }
     });
@@ -109,17 +102,13 @@ function RenderMenuGame(gameFrame) {
 
     gameFrame.className = "game-panel-menu";
     gameFrame.innerHTML = `
-    <div>
-        <p class="errorInput h5"></p>
-        <input class="h5" id="inputName" type="text" placeholder="Podaj nazwę...">
-    </div>
     <button class="play h3">Zacznij grę!</button>
     `
     gameBody.appendChild(gameFrame);
 }
 
 // Render game
-function RenderGameBody(gameFrame, gameItem, i, points, name) {
+function RenderGameBody(gameFrame, gameItem, i, points) {
     const gameBody = document.querySelector(".game-panel");
 
     gameFrame.className = "game-panel-board";
@@ -140,7 +129,7 @@ function RenderGameBody(gameFrame, gameItem, i, points, name) {
     gameBody.appendChild(gameFrame);
 }
 
-function RenderFinishMenuGame(gameItem, gameFrame, points, name) {
+function RenderFinishMenuGame(gameItem, gameFrame, points) {
     const gameBody = document.querySelector(".game-panel");
 
     gameFrame.className = "game-panel-finish";
