@@ -41,6 +41,13 @@ const renderFlashcardItem = (items) => {
             RenderFlashcardHeader(newFlashCardItem, items, i)
         }
     };
+
+    const password = document.getElementById("pwdInput");
+    password.addEventListener("keypress", (event) => {
+        if(event.key === "Enter") {
+            validatePassword(password);
+        }
+    })
 }
 window.addEventListener("load", renderFlashcardItem(flashcards));
 
@@ -50,11 +57,25 @@ function RenderFlashcardHeader(newFlashCardItem, items, i) {
 
     newFlashCardItem.className = "flashcard-section"; 
     newFlashCardItem.innerHTML;
-    newFlashCardItem.innerHTML = `
+
+    if(i === 0) {
+        newFlashCardItem.innerHTML = `
+        <header>
+            <div class="fc-concept">
+                <p class="h1">${items[i].concept}</p>
+                <p class="errorInput h5" id="errorInputPassword"></p>
+                <input id="pwdInput" type="text" placeholder="Podaj hasło..."></input>
+            </div>
+        </header>
+        `;
+    } else {
+        newFlashCardItem.innerHTML = `
         <header>
             <p class="fc-concept h1">${items[i].concept}</p>
         </header>
         `;
+    }
+
     flashcardItem.appendChild(newFlashCardItem);
 }
 function RenderFlashcardSection(newFlashCardItem, items, i) {
@@ -80,4 +101,22 @@ function RenderFlashcardSection(newFlashCardItem, items, i) {
     flashcardItem.appendChild(newFlashCardItem);
 
     document.querySelector(".fc-concept").style = "align-items: center; display: flex; justify-content: center; position: static; transform: translate(0, 0);"
+}
+
+function validatePassword(password) {
+    password = password.value;
+    
+    // Check did password has upper and lower cases
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    // Check did password has Character
+    const hasNumber = /[0-9]/.test(password);
+
+    // length
+    if(password.length < 8) document.querySelector(".errorInput").innerHTML = "Twoje hasło powinno mieć więcej niż 8 znaków.";
+    // upper and lower case
+    else if(!hasUpperCase || !hasLowerCase) document.querySelector(".errorInput").innerHTML = "Twoje hasło powinno zawierać zarówno duże jak i małe litery.";
+    // numbers
+    else if(!hasNumber) document.querySelector(".errorInput").innerHTML = "Twoje hasło powinno zawierać cyfry.";
+    else  document.querySelector(".errorInput").innerHTML = "Twoje hasło jest poprawne.";
 }

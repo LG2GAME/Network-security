@@ -13,6 +13,7 @@
     --silver: #c6c6c6;
     --taupe: #514438;
     --white: #fff;
+    --red: #E53D00;
 }
 
 ::-webkit-scrollbar {
@@ -309,4 +310,195 @@ body {
 
 .fc-t {
     color: var(--silver);
+}
+
+.fth-section,
+.fth-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--af-white);
+}
+
+ .fth-sec {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.fth-sec h2 {
+    text-transform: capitalize;
+}
+.fth-sec:nth-last-child(2n - 0) {
+    flex-direction: row-reverse;
+}
+.fth-sec-left,
+.fth-sec-right {
+    width: 50%;
+    height: 100%;
+}
+.dotlottie {
+    height: 50vh;
+    width: auto;
+}
+
+/* GAME */
+.game {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    color: var(--af-white);
+}
+
+.game-panel {
+    width: 95vw;
+    height: 90vh;
+    background-color: var(--cl-purple);
+    border-radius: 32px;
+}
+
+/* Game - menu (start) */
+.game-panel-menu {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.errorInput {
+    color: var(--red);
+    text-align: center;
+}
+
+.game-panel-menu input {
+    background-color: var(--cl-purple-btn);
+    border: none;
+    padding: .5rem 1.5rem;
+    border-radius: 99px;
+    transition: all .3s ease;
+}
+
+.game-panel-menu input::placeholder {
+    color: var(--af-white);
+    font-style: italic;
+}
+
+.game-panel-menu .play {
+    border-radius: 99px;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    transition: all .3s ease;
+    background-color: var(--cl-purple-btn);
+}
+.game-panel-menu input:hover,
+.game-panel-menu input:focus,
+.game-panel-menu .play:hover {
+    transform: scale(1.05);
+}
+
+/* Game Board */
+.game-panel-board {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem 0;
+}
+
+.game-info {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-around;
+    width: 100%;
+}
+.game-info p {
+    background-color: var(--cl-purple-btn);
+    padding: .5rem 2rem;
+    border-radius: 99px;
+}
+
+.game-panel-board .question {
+    width: 100%;
+    text-align: center;
+    background-color: var(--cl-purple-btn);
+    padding: 1.5rem 2rem;
+}
+
+.game-panel-board .answers {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.game-panel-board .answers button {
+    width: 90%;
+    background-color: var(--cl-purple-btn);
+    border-radius: 99px;
+    text-align: left;
+    padding: .5rem 2.5rem;
+    border: none;
+    transition: all .3s ease;
+}
+.game-panel-board .answers button:hover {
+    transform: scale(1.0125);
+}
+
+/* Game - Finish menu */
+.game-panel-finish {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.gpf-container {
+    width: 25%;
+    height: 75%;
+    background-color: var(--cl-purple-btn);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+    border-radius: 16px;
+}
+
+.gr-btn {
+    border: none;
+    background-color: var(--cl-purple-btn);
+    padding: .5rem 2.5rem;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    color: var(--af-white);
+    transition: all .3s ease;
+}
+.gr-btn:hover {
+    transform: scale(1.05);
+}
+
+/* footer css */
+footer {
+    background-color: var(--rich-black);
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-igms {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.footer-igms img {
+    width: auto;
+    height: 100px;
 }

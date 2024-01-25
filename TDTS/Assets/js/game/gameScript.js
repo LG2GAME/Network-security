@@ -1,6 +1,10 @@
 function gameBuild(gameFrame, gameItem, i, points, isStarted) {
-    if(isStarted === true) {
-        RenderGameBody(gameFrame, gameItem, i, points);
+    let nameOfPlayer
+
+    if(isStarted === true) { // zmienic na true
+        nameOfPlayer = "noname" || document.querySelector("#inputName").value;
+
+        RenderGameBody(gameFrame, gameItem, i, points, nameOfPlayer);
         setScrollnStop();
     } else {
         RenderMenuGame(gameFrame);
@@ -12,20 +16,21 @@ function gameBuild(gameFrame, gameItem, i, points, isStarted) {
             }
         });
     }
-    isAnswerTrue(gameFrame, gameItem, i, points, isStarted);
+
+    isAnswerTrue(gameFrame, gameItem, i, points, isStarted, nameOfPlayer);
 }
 
 const renderGame = (gameItem) => {
     let i = 0;
     let points = 0;
-    let isStarted = false; //// Zmienić na false
+    let isStarted = false;
     const gameFrame = document.createElement("div");
 
     gameBuild(gameFrame, gameItem, i, points, isStarted);
 }
 window.addEventListener("load", renderGame(quizBase));
 
-function isAnswerTrue(gameFrame, gameItem, i, points, isStarted) {
+function isAnswerTrue(gameFrame, gameItem, i, points, isStarted, name) {
     const answerAID = document.querySelector("#answerA");
     const answerBID = document.querySelector("#answerB");
     const answerCID = document.querySelector("#answerC");
@@ -36,12 +41,12 @@ function isAnswerTrue(gameFrame, gameItem, i, points, isStarted) {
             points += gameItem[i].punkty;
             i++;
 
-            if(i >= gameItem.length) RenderFinishMenuGame(gameFrame, points);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points, name);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         } else {
             i++;
 
-            if(i >= gameItem.length) RenderFinishMenuGame(gameFrame, points);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points, name);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         }
     });
@@ -50,12 +55,12 @@ function isAnswerTrue(gameFrame, gameItem, i, points, isStarted) {
             points += gameItem[i].punkty;
             i++;
 
-            if(i >= gameItem.length) RenderFinishMenuGame(gameFrame, points);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points, name);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         } else {
             i++;
 
-            if(i >= gameItem.length) RenderFinishMenuGame(gameFrame, points);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points, name);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         }
     });
@@ -64,12 +69,12 @@ function isAnswerTrue(gameFrame, gameItem, i, points, isStarted) {
             points += gameItem[i].punkty;
             i++;
 
-            if(i >= gameItem.length) RenderFinishMenuGame(gameFrame, points);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points, name);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         } else {
             i++;
 
-            if(i >= gameItem.length) RenderFinishMenuGame(gameFrame, points);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points, name);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         }
     });
@@ -78,12 +83,12 @@ function isAnswerTrue(gameFrame, gameItem, i, points, isStarted) {
             points += gameItem[i].punkty;
             i++;
 
-            if(i >= gameItem.length) RenderFinishMenuGame(gameFrame, points);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points, name);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         } else {
             i++;
 
-            if(i >= gameItem.length) RenderFinishMenuGame(gameFrame, points);
+            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points, name);
             else gameBuild(gameFrame, gameItem, i, points, isStarted);
         }
     });
@@ -98,26 +103,30 @@ function setScrollnStop() {
 // Render game menu
 function RenderMenuGame(gameFrame) {
     const gameBody = document.querySelector(".game-panel");
+    gameBody.innerHTML = ``;
+    gameBody.appendChild(gameFrame);
 
-    gameFrame.className = "game-play-panel";
+
+    gameFrame.className = "game-panel-menu";
     gameFrame.innerHTML = `
     <div>
         <p class="errorInput h5"></p>
         <input class="h5" id="inputName" type="text" placeholder="Podaj nazwę...">
     </div>
-    <button class="play h2">Zacznij grę!</button>
+    <button class="play h3">Zacznij grę!</button>
     `
     gameBody.appendChild(gameFrame);
 }
 
 // Render game
-function RenderGameBody(gameFrame, gameItem, i, points) {
+function RenderGameBody(gameFrame, gameItem, i, points, name) {
     const gameBody = document.querySelector(".game-panel");
 
-    gameFrame.className = "game-board";
+    gameFrame.className = "game-panel-board";
     gameFrame.innerHTML = `
     <div class="game-info">
         <p class="timer h5">Czas: 0</p>
+        <p class="name h4">${name}</p>
         <p class="points h5">Punkty: ${points}</p>
     </div>
         <p class="question h3">${gameItem[i].question}</p>
@@ -131,13 +140,26 @@ function RenderGameBody(gameFrame, gameItem, i, points) {
     gameBody.appendChild(gameFrame);
 }
 
-function RenderFinishMenuGame(gameFrame, points) {
+function RenderFinishMenuGame(gameItem, gameFrame, points, name) {
     const gameBody = document.querySelector(".game-panel");
 
-    gameFrame.className = "game-play-panel";
+    gameFrame.className = "game-panel-finish";
     gameFrame.innerHTML = `
-        <p class="game-end h2">Gratuluję ukończenia Quizzu.</p>
-        <p class="game-end-points h4">Twój wynik to: <sclass="h3">${points}</span></p>
+        <div class="gpf-container">
+            <p class="gpf-name h3">${name}</p>
+            <p class="congratulations h5">Gratuluję ukończenia Quizzu!</p>
+            <p class="gpf-points h4">${points} punktów</p>
+            <button class="gr-btn h4" id="btn-restart">Restart</button>
+        </div>
     `
     gameBody.appendChild(gameFrame);
+
+    const restart = document.getElementById("btn-restart");
+    restart.addEventListener("click", () => {
+        restartGame();
+    });
+}
+
+function restartGame() {
+    renderGame(quizBase)
 }
