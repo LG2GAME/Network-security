@@ -114,8 +114,8 @@ function RenderGameBody(gameFrame, gameItem, i, points) {
     gameFrame.className = "game-panel-board";
     gameFrame.innerHTML = `
     <div class="game-info">
-        <p class="timer h5">Czas: 0</p>
-        <p class="name h4">${name}</p>
+        <p class="timer h5">/p>
+        <p class="name h4"></p>
         <p class="points h5">Punkty: ${points}</p>
     </div>
         <p class="question h3">${gameItem[i].question}</p>
