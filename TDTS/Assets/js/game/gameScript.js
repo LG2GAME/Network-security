@@ -92,6 +92,10 @@ function setScrollnStop() {
     document.getElementById("blockOnGame").scrollIntoView();
     document.body.style.overflow = 'hidden';
 }
+function setScrolling() {
+    document.getElementById("blockOnGame").scrollIntoView();
+    document.body.style.overflow = '';
+}
 
 // Render game menu
 function RenderMenuGame(gameFrame) {
@@ -114,7 +118,7 @@ function RenderGameBody(gameFrame, gameItem, i, points) {
     gameFrame.className = "game-panel-board";
     gameFrame.innerHTML = `
     <div class="game-info">
-        <p class="timer h5">/p>
+        <p class="timer h5"></p>
         <p class="name h4"></p>
         <p class="points h5">Punkty: ${points}</p>
     </div>
@@ -142,6 +146,8 @@ function RenderFinishMenuGame(gameItem, gameFrame, points) {
         </div>
     `
     gameBody.appendChild(gameFrame);
+
+    setScrolling();
 
     const restart = document.getElementById("btn-restart");
     restart.addEventListener("click", () => {

@@ -13,7 +13,7 @@
     --silver: #c6c6c6;
     --taupe: #514438;
     --white: #fff;
-    --red: #E53D00;
+    --red: #D1495B;
 }
 
 ::-webkit-scrollbar {
@@ -159,6 +159,22 @@ body {
 }
 .nd-card-name {
     margin-bottom: 1rem;
+}
+
+.fc-concept .errorInput {
+    background-color: var(--cl-purple-btn);
+}
+
+.passWDInput {
+    background-color: var(--cl-purple-btn);
+    border: none;
+    padding: .5rem 2rem;
+    border-radius: 99px;
+    text-align: center;
+    color: var(--af-white);
+}
+.passWDInput::placeholder {
+    color: var(--af-white);
 }
 
 .nd-buttons {
@@ -371,6 +387,7 @@ body {
 .errorInput {
     color: var(--red);
     text-align: center;
+    font-weight: bold;
 }
 
 .game-panel-menu input {

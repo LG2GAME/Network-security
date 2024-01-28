@@ -43,6 +43,7 @@ const renderFlashcardItem = (items) => {
     };
 
     const password = document.getElementById("pwdInput");
+    document.querySelector(".errorInput").style = "padding: 0";
     password.addEventListener("keypress", (event) => {
         if(event.key === "Enter") {
             validatePassword(password);
@@ -63,8 +64,8 @@ function RenderFlashcardHeader(newFlashCardItem, items, i) {
         <header>
             <div class="fc-concept">
                 <p class="h1">${items[i].concept}</p>
-                <p class="errorInput h5" id="errorInputPassword"></p>
-                <input id="pwdInput" type="text" placeholder="Podaj hasło..."></input>
+                <p class="errorInput h4"></p>
+                <input class="passWDInput" id="pwdInput" type="text" placeholder="Podaj hasło..."></input>
             </div>
         </header>
         `;
@@ -105,18 +106,25 @@ function RenderFlashcardSection(newFlashCardItem, items, i) {
 
 function validatePassword(password) {
     password = password.value;
-    
-    // Check did password has upper and lower cases
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    // Check did password has Character
-    const hasNumber = /[0-9]/.test(password);
+    const passWDError = document.querySelector(".errorInput");
 
-    // length
-    if(password.length < 8) document.querySelector(".errorInput").innerHTML = "Twoje hasło powinno mieć więcej niż 8 znaków.";
-    // upper and lower case
-    else if(!hasUpperCase || !hasLowerCase) document.querySelector(".errorInput").innerHTML = "Twoje hasło powinno zawierać zarówno duże jak i małe litery.";
-    // numbers
-    else if(!hasNumber) document.querySelector(".errorInput").innerHTML = "Twoje hasło powinno zawierać cyfry.";
-    else  document.querySelector(".errorInput").innerHTML = "Twoje hasło jest poprawne.";
+    let lettersValidation = /^(?=.*[a-z])(?=.*[A-Z])/;
+    let numbValidation = /^(?=.*\d)/;
+    let specialCharValidation = /^(?=.*[!@#$%^&*()_+{}:<>?`~])/;
+
+    if (password === "") {
+        passWDError.innerHTML = "";
+        passWDError.style = "padding: 0;";
+    } else {
+        passWDError.style = "padding: .5rem;";
+
+        if(password.length < 8) passWDError.innerHTML = "Twoje hasło powinno mieć więcej niż 8 znaków.";
+        else if(!lettersValidation.test(password)) passWDError.innerHTML = "Twoje hasło powinno zawierać co najmniej 1 małą i 1 dużą literę.";
+        else if(!numbValidation.test(password)) passWDError.innerHTML = "Twoje hasło powinno mieć minimum 1 cyfrę.";
+        else if(!specialCharValidation.test(password)) passWDError.innerHTML = "Twoje hasło powinno mieć co najmniej 1 znak specjalny.";
+        else {
+            passWDError.style = "color: #0F9957 !important; text-shadow: 0px 4px 6px #063b21; padding: .5rem;";
+            passWDError.innerHTML = "Twoje hasło spełnia wszystkie warunki!";
+        }
+    }
 }
