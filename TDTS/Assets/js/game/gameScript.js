@@ -23,67 +23,91 @@ const renderGame = (gameItem) => {
 }
 window.addEventListener("load", renderGame(quizBase));
 
+
+
 function isAnswerTrue(gameFrame, gameItem, i, points, isStarted) {
     const answerAID = document.querySelector("#answerA");
     const answerBID = document.querySelector("#answerB");
     const answerCID = document.querySelector("#answerC");
     const answerDID = document.querySelector("#answerD");
 
+    let isAnswerClicked = false;
+
+    function ieRender() {
+        if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points);
+        else gameBuild(gameFrame, gameItem, i, points, isStarted);
+    }
+
     answerAID.addEventListener("click", () => {
-        if(gameItem[i].correctAnswer === gameItem[i].answerA) {
-            points += gameItem[i].punkty;
-            i++;
+        if(isAnswerClicked == false) {
+            isAnswerClicked = true;
 
-            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points);
-            else gameBuild(gameFrame, gameItem, i, points, isStarted);
-        } else {
-            i++;
+            if(gameItem[i].correctAnswer === gameItem[i].answerA) {
+                answerAID.style = "background-color: #6FC276;";
+                points += gameItem[i].punkty;
+                newPointsGenerate(points);
+            } else answerAID.style = "background-color: #D1495B;";
 
-            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points);
-            else gameBuild(gameFrame, gameItem, i, points, isStarted);
+            i++;
         }
+
+        setTimeout(() => {
+            ieRender();
+        }, 1000);
     });
+
     answerBID.addEventListener("click", () => {
-        if(gameItem[i].correctAnswer === gameItem[i].answerB) {
-            points += gameItem[i].punkty;
-            i++;
+        if(isAnswerClicked == false) {
+            isAnswerClicked = true;
 
-            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points);
-            else gameBuild(gameFrame, gameItem, i, points, isStarted);
-        } else {
+            if(gameItem[i].correctAnswer === gameItem[i].answerB) {
+                answerBID.style = "background-color: #6FC276;";
+                points += gameItem[i].punkty;
+                newPointsGenerate(points);
+            } else answerBID.style = "background-color: #D1495B;";
+            
             i++;
-
-            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points);
-            else gameBuild(gameFrame, gameItem, i, points, isStarted);
         }
+
+        setTimeout(() => {
+            ieRender();
+        }, 1000);
     });
+
     answerCID.addEventListener("click", () => {
-        if(gameItem[i].correctAnswer === gameItem[i].answerC) {
-            points += gameItem[i].punkty;
-            i++;
+        if(isAnswerClicked == false) {
+            isAnswerClicked = true;
 
-            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points);
-            else gameBuild(gameFrame, gameItem, i, points, isStarted);
-        } else {
+            if(gameItem[i].correctAnswer === gameItem[i].answerC) {
+                answerCID.style = "background-color: #6FC276;";
+                points += gameItem[i].punkty;
+                newPointsGenerate(points);
+            } else answerCID.style = "background-color: #D1495B;";
+            
             i++;
-
-            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points);
-            else gameBuild(gameFrame, gameItem, i, points, isStarted);
         }
+
+        setTimeout(() => {
+            ieRender();
+        }, 1000);
     });
+
     answerDID.addEventListener("click", () => {
-        if(gameItem[i].correctAnswer === gameItem[i].answerD) {
-            points += gameItem[i].punkty;
-            i++;
+        if(isAnswerClicked == false) {
+            isAnswerClicked = true;
 
-            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points);
-            else gameBuild(gameFrame, gameItem, i, points, isStarted);
-        } else {
+            if(gameItem[i].correctAnswer === gameItem[i].answerD) {
+                answerDID.style = "background-color: #6FC276;";
+                points += gameItem[i].punkty;
+                newPointsGenerate(points);
+            } else answerDID.style = "background-color: #D1495B;";
+            
             i++;
-
-            if(i >= gameItem.length) RenderFinishMenuGame(gameItem, gameFrame, points);
-            else gameBuild(gameFrame, gameItem, i, points, isStarted);
         }
+
+        setTimeout(() => {
+            ieRender();
+        }, 1000);
     });
 }
 
@@ -118,8 +142,6 @@ function RenderGameBody(gameFrame, gameItem, i, points) {
     gameFrame.className = "game-panel-board";
     gameFrame.innerHTML = `
     <div class="game-info">
-        <p class="timer h5"></p>
-        <p class="name h4"></p>
         <p class="points h5">Punkty: ${points}</p>
     </div>
         <p class="question h3">${gameItem[i].question}</p>
@@ -131,6 +153,15 @@ function RenderGameBody(gameFrame, gameItem, i, points) {
     </div>
     `
     gameBody.appendChild(gameFrame);
+}
+
+// Points refresh
+function newPointsGenerate(points) {
+    const gamePoints = document.querySelector(".game-info");
+
+    gamePoints.innerHTML = `
+    <p class="points h5">Punkty: ${points}</p>
+    `
 }
 
 function RenderFinishMenuGame(gameItem, gameFrame, points) {

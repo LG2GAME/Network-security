@@ -1,6 +1,4 @@
 const renderPDItem = (item) => {
-    console.log("dziala0");
-
     let i = 0;
 
     const newPDCardItem = document.createElement("div");
@@ -21,8 +19,6 @@ const renderPDItem = (item) => {
 window.addEventListener("load", renderPDItem(pdbase));
 
 function generatePDItem(newPDCardItem, item, i) {
-    console.log("dziala2");
-
     const PDItem = document.querySelector(".left-section-nd");
 
     newPDCardItem.innerHTML = `
@@ -35,6 +31,4 @@ function generatePDItem(newPDCardItem, item, i) {
         
     `;
     PDItem.appendChild(newPDCardItem);
-
-    console.log("dziala3");
 }

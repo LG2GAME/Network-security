@@ -43,11 +43,15 @@ const renderFlashcardItem = (items) => {
     };
 
     const password = document.getElementById("pwdInput");
+    const pwdButton = document.getElementById("checkButton");
     document.querySelector(".errorInput").style = "padding: 0";
     password.addEventListener("keypress", (event) => {
         if(event.key === "Enter") {
             validatePassword(password);
         }
+    })
+    pwdButton.addEventListener("click", (event) => {
+        validatePassword(password);
     })
 }
 window.addEventListener("load", renderFlashcardItem(flashcards));
@@ -64,8 +68,11 @@ function RenderFlashcardHeader(newFlashCardItem, items, i) {
         <header>
             <div class="fc-concept">
                 <p class="h1">${items[i].concept}</p>
-                <p class="errorInput h4"></p>
-                <input class="passWDInput" id="pwdInput" type="text" placeholder="Podaj hasło..."></input>
+                <div class="passwd-div">
+                    <p class="errorInput h4"></p>
+                    <input class="passwd-input" id="pwdInput" type="text" placeholder="Podaj hasło..."></input>
+                    <button id="checkButton">Sprawdź</button>
+                </div>
             </div>
         </header>
         `;
@@ -89,12 +96,12 @@ function RenderFlashcardSection(newFlashCardItem, items, i) {
         </header>
         <div class="fc-text">
             <div class="fc-definition">
-                <p class="fc-title h2">${items[i].defName}</p>
-                <p class="fc-t h5">${items[i].def}</p>
+                <p class="fc-title h4">${items[i].defName}</p>
+                <p class="fc-t h6">${items[i].def}</p>
             </div>
             <div class="fc-note">
-                <p class="fc-title h2">${items[i].protName}</p>
-                <p class="fc-t h5">${items[i].prot}</p>
+                <p class="fc-title h4">${items[i].protName}</p>
+                <p class="fc-t h6">${items[i].prot}</p>
             </div>
         
         </div>
@@ -113,10 +120,10 @@ function validatePassword(password) {
     let specialCharValidation = /^(?=.*[!@#$%^&*()_+{}:<>?`~])/;
 
     if (password === "") {
-        passWDError.innerHTML = "";
-        passWDError.style = "padding: 0;";
+        passWDError.style = "padding: 1rem .5rem;";
+        passWDError.innerHTML = "Najpierw wpisz hasło";
     } else {
-        passWDError.style = "padding: .5rem;";
+        passWDError.style = "padding: 1rem .5rem;";
 
         if(password.length < 8) passWDError.innerHTML = "Twoje hasło powinno mieć więcej niż 8 znaków.";
         else if(!lettersValidation.test(password)) passWDError.innerHTML = "Twoje hasło powinno zawierać co najmniej 1 małą i 1 dużą literę.";
